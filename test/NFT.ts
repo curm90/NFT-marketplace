@@ -19,4 +19,17 @@ describe('NFT contract', function () {
       expect(await nft.owner()).to.equal(owner.address);
     });
   });
+
+  describe('Minting', async function () {
+    it('should mint an NFT and set the correct tokenURI', async function () {
+      const { nft, account1 } = await loadFixture(deployFixture);
+
+      const tokenURI = 'https://example.com/token1';
+      await nft.safeMint(account1.address, tokenURI);
+
+      const tokenId = 0;
+      expect(await nft.ownerOf(tokenId)).to.equal(account1.address);
+      expect(await nft.tokenURI(tokenId)).to.equal(tokenURI);
+    });
+  });
 });
