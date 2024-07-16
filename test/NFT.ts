@@ -47,5 +47,15 @@ describe('NFT contract', function () {
       expect(await nft.ownerOf(tokenId2)).to.equal(account1.address);
       expect(await nft.tokenURI(tokenId2)).to.equal(tokenURI2);
     });
+    it('should not allow non owners to mint NFTs', async function () {
+      const { nft, account1 } = await loadFixture(deployFixture);
+
+      const tokenURI = 'https://example.com/token1';
+
+      await expect(nft.connect(account1).safeMint(account1.address, tokenURI)).to.be.revertedWithCustomError(
+        nft,
+        'OwnableUnauthorizedAccount',
+      );
+    });
   });
 });
