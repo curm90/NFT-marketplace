@@ -31,5 +31,21 @@ describe('NFT contract', function () {
       expect(await nft.ownerOf(tokenId)).to.equal(account1.address);
       expect(await nft.tokenURI(tokenId)).to.equal(tokenURI);
     });
+    it('should increment the token id correctly', async function () {
+      const { nft, account1 } = await loadFixture(deployFixture);
+
+      const tokenURI1 = 'https://example.com/token1';
+      const tokenURI2 = 'https://example.com/token2';
+
+      await nft.safeMint(account1.address, tokenURI1);
+      const tokenId1 = 0;
+      expect(await nft.ownerOf(tokenId1)).to.equal(account1.address);
+      expect(await nft.tokenURI(tokenId1)).to.equal(tokenURI1);
+
+      await nft.safeMint(account1.address, tokenURI2);
+      const tokenId2 = 1;
+      expect(await nft.ownerOf(tokenId2)).to.equal(account1.address);
+      expect(await nft.tokenURI(tokenId2)).to.equal(tokenURI2);
+    });
   });
 });
