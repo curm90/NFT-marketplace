@@ -25,9 +25,10 @@ describe('NFT contract', function () {
       const { nft, account1 } = await loadFixture(deployFixture);
 
       const tokenURI = 'https://example.com/token1';
+      const tokenId = await nft.getNextTokenId();
+
       await nft.safeMint(account1.address, tokenURI);
 
-      const tokenId = 0;
       expect(await nft.ownerOf(tokenId)).to.equal(account1.address);
       expect(await nft.tokenURI(tokenId)).to.equal(tokenURI);
     });
@@ -37,13 +38,13 @@ describe('NFT contract', function () {
       const tokenURI1 = 'https://example.com/token1';
       const tokenURI2 = 'https://example.com/token2';
 
+      const tokenId1 = await nft.getNextTokenId();
       await nft.safeMint(account1.address, tokenURI1);
-      const tokenId1 = 0;
       expect(await nft.ownerOf(tokenId1)).to.equal(account1.address);
       expect(await nft.tokenURI(tokenId1)).to.equal(tokenURI1);
 
+      const tokenId2 = await nft.getNextTokenId();
       await nft.safeMint(account1.address, tokenURI2);
-      const tokenId2 = 1;
       expect(await nft.ownerOf(tokenId2)).to.equal(account1.address);
       expect(await nft.tokenURI(tokenId2)).to.equal(tokenURI2);
     });
@@ -56,6 +57,23 @@ describe('NFT contract', function () {
         nft,
         'OwnableUnauthorizedAccount',
       );
+    });
+  });
+  describe('getNextTokenId', function () {
+    it('should return the current tokenId', async function () {
+      const { nft, owner } = await loadFixture(deployFixture);
+
+      const tokenURI1 = 'https://example.com/token1';
+      const tokenURI2 = 'https://example.com/token2';
+
+      await nft.safeMint(owner, tokenURI1);
+      const tokenId = await nft.getNextTokenId();
+
+      await nft.safeMint(owner, tokenURI2);
+      const tokenId2 = await nft.getNextTokenId();
+
+      expect(tokenId).to.equal(1);
+      expect(tokenId2).to.equal(2);
     });
   });
 });
