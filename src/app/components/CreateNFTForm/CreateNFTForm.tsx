@@ -1,6 +1,8 @@
 'use client';
 
 import { ChangeEvent, FormEvent, useState } from 'react';
+import Input from '../Input/Input';
+import Button from '../Button/Button';
 
 // const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CA;
 
@@ -13,7 +15,7 @@ const initialFormValues = {
 export default function CreateNFTForm() {
   const [formValues, setFormValues] = useState(initialFormValues);
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     console.log({ name, value });
 
@@ -30,23 +32,32 @@ export default function CreateNFTForm() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit} className='text-black'>
+    <div className='mx-auto my-12 flex max-w-[750px] flex-col gap-4 px-12'>
+      <div className='flex flex-col gap-4'>
+        <h1 className='text-2xl'>Mint Your Own NFT</h1>
+        <p>
+          Create and mint your unique NFT by filling out the form below. Upload an image, provide a name and
+          description, and mint your NFT on the blockchain. Once minted, your NFT will be available for
+          viewing and trading on our marketplace.
+        </p>
+      </div>
+      <form onSubmit={handleSubmit} className='flex w-full flex-col gap-4 text-black'>
         <div>
           <label htmlFor='name'>Name:</label>
-          <input type='text' id='name' name='name' value={formValues.name} onChange={handleInputChange} />
+          <Input type='text' id='name' name='name' value={formValues.name} onChange={handleInputChange} />
         </div>
         <div>
           <label htmlFor='description'>Description:</label>
-          <input
-            type='text'
+          <textarea
+            className='w-full rounded-lg border border-gray-300 outline-none'
+            rows={6}
             id='description'
             name='description'
             value={formValues.description}
             onChange={handleInputChange}
           />
         </div>
-        <button type='submit'>Mint</button>
+        <Button type='submit'>Mint</Button>
       </form>
     </div>
   );
