@@ -17,4 +17,8 @@ contract NFT is ERC721URIStorage, Ownable {
         _setTokenURI(tokenId, tokenURI);
         return tokenId;
     }
+
+    function getNextTokenId() public view returns (uint256) {
+        return _nextTokenId;
+    }
 }
