@@ -1,6 +1,6 @@
 'use client';
 
-import client from '@/app/utils/thirdwebClient';
+import client from '@/utils/thirdwebClient';
 import { ConnectButton } from 'thirdweb/react';
 import { createWallet, inAppWallet } from 'thirdweb/wallets';
 

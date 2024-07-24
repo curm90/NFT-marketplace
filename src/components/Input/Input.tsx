@@ -1,5 +1,5 @@
 import { ChangeEvent } from 'react';
-import { cn } from '@/app/utils/classNames';
+import { cn } from '@/utils/classNames';
 
 type InputProps = {
   type: string;

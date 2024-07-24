@@ -1,4 +1,4 @@
-import { cn } from '@/app/utils/classNames';
+import { cn } from '@/utils/classNames';
 
 type ButtonProps = {
   type: 'submit' | 'reset' | 'button';
