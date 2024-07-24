@@ -1,4 +1,4 @@
-import CreateNFTForm from './components/CreateNFTForm/CreateNFTForm';
+import CreateNFTForm from '../components/CreateNFTForm/CreateNFTForm';
 
 export default function Home() {
   return (
