@@ -73,10 +73,14 @@ export default function CreateNFTForm() {
     if (!metadataUri) return;
 
     try {
+      if (!CONTRACT_ADDRESS) {
+        throw new Error('CONTRACT_ADDRESS is not defined');
+      }
+
       const contract = getContract({
         client,
         chain: sepolia,
-        address: CONTRACT_ADDRESS as string,
+        address: CONTRACT_ADDRESS,
         abi: abi as ContractOptions['abi'],
       });
 
