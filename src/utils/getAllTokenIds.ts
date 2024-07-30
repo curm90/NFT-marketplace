@@ -3,8 +3,7 @@ import { sepolia } from 'thirdweb/chains';
 import { type ContractOptions } from 'thirdweb/contract';
 import client from './thirdwebClient';
 import NFTArtifact from '../../artifacts/contracts/NFT.sol/NFT.json';
-
-const CONTRACT_ADDRESS = process.env.NEXT_PUBLIC_CA;
+import { CONTRACT_ADDRESS } from '@/app/constants/contract';
 
 export default async function getAllTokenIds() {
   if (!CONTRACT_ADDRESS) {
@@ -29,7 +28,7 @@ export default async function getAllTokenIds() {
     const tokenIds = [];
 
     for (let i = 0; i < totalSupply; i++) {
-      tokenIds.push(i + 1);
+      tokenIds.push(i);
     }
 
     return tokenIds;
