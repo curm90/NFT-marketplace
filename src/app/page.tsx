@@ -1,9 +1,12 @@
-import TokenIds from '@/components/TokenIds/TokenIds';
+// import TokenIds from '@/components/TokenIds/TokenIds';
+
+import CreateNFTForm from '@/components/CreateNFTForm/CreateNFTForm';
 
 export default function Home() {
   return (
     <main className=''>
-      <TokenIds />
+      <CreateNFTForm />
+      {/* <TokenIds /> */}
     </main>
   );
 }
