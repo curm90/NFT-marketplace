@@ -112,6 +112,7 @@ export default function CreateNFTForm() {
     console.log({ metadataUri });
 
     await mintNFT(metadataUri as string);
+    setFormValues(initialFormValues);
   };
 
   return (
@@ -144,7 +145,9 @@ export default function CreateNFTForm() {
           <label htmlFor='file'>Image</label>
           <Input type='file' id='file' value={formValues.file} onChange={handleInputChange} name='file' />
         </div>
-        <Button type='submit'>{minting ? 'Minting...' : 'Mint'}</Button>
+        <Button disabled={minting} type='submit' className={minting ? 'opacity-60' : ''}>
+          {minting ? 'Minting...' : 'Mint'}
+        </Button>
       </form>
     </div>
   );
